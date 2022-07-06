@@ -1,0 +1,34 @@
+#!/bin/bash
+set -e
+OUT_PATH=output
+FILE_LIST_PATH=$OUT_PATH/file-list.txt
+MODULES="atomic container lockfree align algorithm asio context filesystem stacktrace beast multiprecision process foreach functional"
+
+rm -rf $OUT_PATH
+mkdir -p $OUT_PATH
+
+DEP_LIST_PATH=$OUT_PATH/deps.txt
+TMP=$OUT_PATH/tmp.txt
+for mod in $MODULES; do
+    echo "Scanning module $mod"
+
+    # Add module itselt
+    echo $mod >>$DEP_LIST_PATH
+
+    # Add all dependent modules
+    dist/bin/boostdep --brief $mod >$TMP
+    cat $TMP | sed -e '1d' -e'/# .*/ d' -e '/^[[:space:]]*$/d' >>$DEP_LIST_PATH
+done
+
+# Make deps unique
+sort $DEP_LIST_PATH | uniq >$OUT_PATH/deps.uniq.txt
+
+# Build file list
+cat $OUT_PATH/deps.uniq.txt | sed -e 's+numeric~conversion+numeric/conversion+' -e 's+^\(.*\)$+libs/\1+' >$FILE_LIST_PATH
+echo "tools" >>$FILE_LIST_PATH
+echo "CMakeLists.txt" >>$FILE_LIST_PATH
+echo "LICENSE_1_0.txt" >>$FILE_LIST_PATH
+echo "README.md" >>$FILE_LIST_PATH
+
+# Create archive
+7z a $OUT_PATH/output.7z @$FILE_LIST_PATH -xr!doc -xr!ci -xr!benchmark -xr!test -xr!examples
