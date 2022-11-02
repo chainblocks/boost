@@ -17,7 +17,7 @@ for mod in $MODULES; do
 
     # Add all dependent modules
     dist/bin/boostdep --brief $mod >$TMP
-    cat $TMP | sed -e '1d' -e'/# .*/ d' -e '/^[[:space:]]*$/d' >>$DEP_LIST_PATH
+    cat $TMP | sed -e '1d' -e'/# .*/ d' -e '/^[[:space:]]*$/d' -e '/\(unknown\)/d' >>$DEP_LIST_PATH
 done
 
 # Make deps unique
