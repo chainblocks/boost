@@ -395,7 +395,7 @@
 	branch = .
 [submodule "asio"]
 	path = libs/asio
-	url = https://github.com/boostorg/asio.git
+	url = https://github.com/shards-lang/boost-asio.git
 	fetchRecurseSubmodules = on-demand
 	branch = .
 [submodule "uuid"]
@@ -550,7 +550,7 @@
 	branch = .
 [submodule "lockfree"]
 	path = libs/lockfree
-	url = https://github.com/boostorg/lockfree.git
+	url = https://github.com/shards-lang/boost-lockfree.git
 	fetchRecurseSubmodules = on-demand
 	branch = .
 [submodule "assert"]
@@ -650,7 +650,7 @@
 	branch = .
 [submodule "stacktrace"]
 	path = libs/stacktrace
-	url = https://github.com/boostorg/stacktrace.git
+	url = https://github.com/shards-lang/boost-stacktrace.git
 	fetchRecurseSubmodules = on-demand
 	branch = .
 [submodule "poly_collection"]
