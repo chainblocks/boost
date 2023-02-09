@@ -650,7 +650,7 @@
 	branch = .
 [submodule "stacktrace"]
 	path = libs/stacktrace
-	url = https://github.com/boostorg/stacktrace.git
+	url = https://github.com/shards-lang/boost-stacktrace.git
 	fetchRecurseSubmodules = on-demand
 	branch = .
 [submodule "poly_collection"]
