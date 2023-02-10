@@ -20,10 +20,13 @@ jobs:
     - name: Package
       run: |
         ./package_shards
-        sha256sum output/output.7z
+        BODY=output/body.txt
+        echo "Automatically generated release" >$BODY
+        sha256sum output/output.7z >>$BODY
     - name: Make release
       uses: ncipollo/release-action@v1
       with:
         allowUpdates: true
+        bodyFile: output/body.txt
         artifacts: "output/output.7z"
         token: ${{secrets.GITHUB_TOKEN}}
