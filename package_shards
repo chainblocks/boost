@@ -24,7 +24,7 @@ done
 sort $DEP_LIST_PATH | uniq >$OUT_PATH/deps.uniq.txt
 
 # Build file list
-cat $OUT_PATH/deps.uniq.txt | sed -e 's+numeric~conversion+numeric/conversion+' -e 's+^\(.*\)$+libs/\1+' >$FILE_LIST_PATH
+cat $OUT_PATH/deps.uniq.txt | sed -e 's+numeric~conversion+numeric/conversion+' -e 's+^\(.*\)$+libs/\1+' -e '/\(unknown\)/d' >$FILE_LIST_PATH
 echo "tools" >>$FILE_LIST_PATH
 echo "CMakeLists.txt" >>$FILE_LIST_PATH
 echo "LICENSE_1_0.txt" >>$FILE_LIST_PATH
